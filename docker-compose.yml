@@ -1,0 +1,17 @@
+version: '3'
+services:
+  teste-postgres-compose:
+    image: postgres:10
+    environment:
+      POSTGRES_PASSWORD: "Post"
+    ports:
+      - "15432:5432"
+
+    networks:
+      - postgres-compose-network
+
+  javerservice:
+    image: openjdk:11
+networks:
+  postgres-compose-network:
+    driver: bridge
