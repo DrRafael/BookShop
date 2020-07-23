@@ -1,7 +1,6 @@
 package org.javalearncourse.bookshop.services;
 
-import org.javalearncourse.bookshop.beans.Product;
-
+import org.javalearncourse.bookshop.beans.PrintEdition;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +25,15 @@ public class Dbase {
             return con;
         }
 
-        public List<Product> getAllProduct(){
+        public List<PrintEdition> getAllProduct(){
             String sql = "SELECT * FROM product ";
-            List<Product> product = new ArrayList<>();
+            List<PrintEdition> product = new ArrayList<>();
             Connection con = connection();
             try {
                 Statement st =con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 while(rs.next()) {
-                    Product c = new Product(rs.getInt("id"), rs.getString("title"), rs.getString("author"),rs.getDouble("price"));
+                    PrintEdition c = new PrintEdition(rs.getInt("id"), rs.getString("title"), rs.getString("author"),rs.getDouble("price"));
                     product.add(c);
                 }
             } catch (Exception e) {

@@ -1,11 +1,11 @@
 package org.javalearncourse.bookshop.services;
 
-import org.javalearncourse.bookshop.beans.Product;
+import org.javalearncourse.bookshop.beans.PrintEdition;
 
 import java.util.List;
 
 public interface ProductService {
 
 
-    List<Product> getAllProducts();
+    List<PrintEdition> getAllProducts();
 }
