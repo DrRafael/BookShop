@@ -17,8 +17,6 @@ configurations {
         extendsFrom developmentOnly
     }
 }
-
-
 sourceCompatibility = 1.8
 
 repositories {
@@ -32,14 +30,12 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    // https://mvnrepository.com/artifact/org.postgresql/postgresql
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4-1205-jdbc42'
 
     testCompile('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
-
 test {
     useJUnitPlatform()
 }
