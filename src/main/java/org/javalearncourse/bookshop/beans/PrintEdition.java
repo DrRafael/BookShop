@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class PrintEdition {
@@ -13,13 +14,13 @@ public class PrintEdition {
 
     private String title;
     private String author;
-    private double price;
+    private BigDecimal price;
 
     public PrintEdition() {
 
     }
 
-    public PrintEdition(String title, String author, double price) {
+    public PrintEdition(String title, String author, BigDecimal  price) {
         this.title = title;
         this.author = author;
         this.price = price;
@@ -49,11 +50,11 @@ public class PrintEdition {
         this.author = author;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal  price) {
         this.price = price;
     }
 

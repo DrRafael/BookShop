@@ -5,10 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+Выберете тип
+<select>
+    <option>Все</option>
+    <option>Книги</option>
+    <option>Газеты</option>
+    <option>Журналы</option>
+</select>
 <table>
     <thead>
     <tr>
         <th> Title </th>
+        <th> Author </th>
         <th> Price </th>
     </tr>
     </thead>
@@ -18,6 +26,7 @@
     </tr>
     <tr th:each="product : ${printEdition}">
         <td><span th:text="${product.title}"> Title </span></td>
+        <td><span th:text="${product.author}"> Author </span></td>
         <td><span th:text="${product.price}"> Price </span></td>
         <td><span><button>Купить </button></span></td>
     </tr>
