@@ -13,11 +13,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${products.empty}">
+    <tr th:if="${printEdition.empty}">
         <td colspan="2"> No Books Available </td>
     </tr>
-    <tr th:each="product : ${products}">
-        <td><span th:text="${product.name}"> Name </span></td>
+    <tr th:each="product : ${printEdition}">
+        <td><span th:text="${product.title}"> Title </span></td>
         <td><span th:text="${product.price}"> Price </span></td>
         <td><span><button>Купить </button></span></td>
     </tr>

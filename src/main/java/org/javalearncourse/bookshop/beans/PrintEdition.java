@@ -15,6 +15,16 @@ public class PrintEdition {
     private String author;
     private double price;
 
+    public PrintEdition() {
+
+    }
+
+    public PrintEdition(String title, String author, double price) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
@@ -44,13 +54,6 @@ public class PrintEdition {
     }
 
     public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public PrintEdition(int id, String title, String author, double price) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
         this.price = price;
     }
 
