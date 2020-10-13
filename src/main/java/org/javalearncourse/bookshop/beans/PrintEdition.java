@@ -1,26 +1,27 @@
 package org.javalearncourse.bookshop.beans;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name="print_edition")
 public class PrintEdition {
     @Id
     @GeneratedValue (strategy=GenerationType.AUTO)
-    private  Integer id;
 
+    private  Integer id;
     private String title;
     private String author;
-    private BigDecimal price;
+    private int price;
 
     public PrintEdition() {
 
     }
 
-    public PrintEdition(String title, String author, BigDecimal  price) {
+    public PrintEdition(String title, String author, int price) {
         this.title = title;
         this.author = author;
         this.price = price;
@@ -50,11 +51,11 @@ public class PrintEdition {
         this.author = author;
     }
 
-    public BigDecimal getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal  price) {
+    public void setPrice(int  price) {
         this.price = price;
     }
 

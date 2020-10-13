@@ -3,14 +3,18 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--script src="filter.js"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+
+
 Выберете тип
-<select>
-    <option>Все</option>
-    <option>Книги</option>
-    <option>Газеты</option>
-    <option>Журналы</option>
+<select id="filter">
+    <option value="all">Все</option>
+    <option value="book" >Книги</option>
+    <option value="newspaper">Газеты</option>
+    <option value="magazine">Журналы</option>
 </select>
 <table>
     <thead>
@@ -32,5 +36,32 @@
     </tr>
     </tbody>
 </table>
+
+<script>
+    var  filter = document.getElementById("filter");
+    filter.onchange = function(){
+
+    let  path;
+    let filterValue = this.value;
+    if (this.value ===  'all'){
+        path = '/'
+    } else {
+        path = "/filter/" + this.value;
+    }
+    $.ajax({
+        url: path,
+        type: 'GET',
+
+        success: function( data ) {
+            $("body").html(data);
+            $(filter).val(filterValue);
+
+        },
+        cache: false
+        });
+    };
+
+</script>
 </body>
 </html>
+

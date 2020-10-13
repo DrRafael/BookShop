@@ -5,20 +5,20 @@ import org.javalearncourse.bookshop.beans.PrintEdition;
 import org.javalearncourse.bookshop.repos.PrintEditionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
+
 @Controller
+@ControllerAdvice
 public class IndexController {
+
     @Autowired
     private PrintEditionRepo printEditionRepo;
 
 
-    @GetMapping
+
+    @RequestMapping
     public String main(Map<String, Object> model){
         Iterable<PrintEdition> printEditions = printEditionRepo.findAll();
         model.put("printEdition",printEditions);
@@ -26,4 +26,16 @@ public class IndexController {
         return "index";
     }
 
+
+
+    @RequestMapping(value = "/filter/{printEditionCategory}", method = RequestMethod.GET)
+    public String filter(@PathVariable  String printEditionCategory, Map<String, Object> model){
+
+        Iterable<PrintEdition> printEditions = printEditionRepo.findByPrintEditionByCategory(printEditionCategory);
+        model.put("printEdition",printEditions);
+        System.out.println("!!!!!!!!!" + printEditionCategory);
+
+        return "index";
+
+    }
 }
