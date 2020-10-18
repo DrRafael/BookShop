@@ -3,21 +3,24 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!--script src="filter.js"></script-->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/filter.js}"></script>
+
+
 </head>
 <body>
 
 
 Выберете тип
-<select id="filtercategory" onchange="filters()">
+<select id="filtercategory" th:onchange="filters()">
     <option value="all">Все</option>
     <option value="book" >Книги</option>
     <option value="newspaper">Газеты</option>
     <option value="magazine">Журналы</option>
 </select>
 
-<select id="pricesfilter" onchange="filters()">
+<select id="pricesfilter" th:onchange="filters()">
     <option value="nofilter">Без фильтра </option>
     <option value="increase">По возрастанию</option>
     <option value="decrease">По убыванию</option>
@@ -44,54 +47,6 @@
     </tr>
     </tbody>
 </table>
-
-<script>
-
-
-
-
-
-function filters(){
-    let filterCategory = document.getElementById("filtercategory");
-    let filterPrice = document.getElementById("pricesfilter");
-
-    let previousCategory = filterCategory.value;
-    let previousPrice = filterPrice.value;
-    let  path = '/filter';
-    let dataObj = {};
-
-    if (filterCategory.value ===  'all' && filterPrice.value === 'nofilter'){
-        path = '/';
-    }
-
-    if (filterCategory.value != 'all' && filterPrice.value === 'nofilter'){
-
-       dataObj =    {category : filterCategory.value , pricesort : "nofilter"};
-    }
-
-    if (filterCategory.value ===  'all' && filterPrice.value != 'nofilter'){
-        dataObj =    {category  :"all" , pricesort : filterPrice.value};
-    }
-
-    if (filterCategory.value !=  'all' && filterPrice.value != 'nofilter'){
-        dataObj =    {category : filterCategory.value , pricesort : filterPrice.value};
-    }
-
-    $.ajax({
-        url: path,
-        data: dataObj,
-        type: 'GET',
-        success: function( data ) {
-            $("body").html(data);
-            $("#filtercategory").val(previousCategory);
-            $("#pricesfilter").val(previousPrice);
-        }
-        });
-
-
-}
-
-</script>
 </body>
 </html>
 
