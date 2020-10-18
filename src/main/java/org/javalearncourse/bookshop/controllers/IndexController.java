@@ -1,9 +1,9 @@
 package org.javalearncourse.bookshop.controllers;
 
-
 import org.javalearncourse.bookshop.beans.PrintEdition;
 import org.javalearncourse.bookshop.repos.PrintEditionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
@@ -27,13 +27,27 @@ public class IndexController {
     }
 
 
+    @RequestMapping(value = "/filter", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String filterCategory(@RequestParam("category")  String printEditionCategory, @RequestParam("pricesort")  String priceSort, Map<String, Object> model){
 
-    @RequestMapping(value = "/filter/{printEditionCategory}", method = RequestMethod.GET)
-    public String filter(@PathVariable  String printEditionCategory, Map<String, Object> model){
+        Iterable<PrintEdition> printEditions = null ;
 
-        Iterable<PrintEdition> printEditions = printEditionRepo.findByPrintEditionByCategory(printEditionCategory);
+        if (printEditionCategory.equals("all")){
+            if (priceSort!= null && priceSort.equals("decrease")){
+                printEditions = printEditionRepo.findPrintEditionByPriceDesc();
+            } else {
+                printEditions = printEditionRepo.findAll();
+            }
+        } else {
+            if (priceSort.equals("decrease")){
+                printEditions = printEditionRepo.findPrintEditionByPriceAndCategoryDesc(printEditionCategory);
+            } else {
+                printEditions = printEditionRepo.findPrintEditionByPriceAndCategory(printEditionCategory);
+            }
+        }
+
         model.put("printEdition",printEditions);
-        System.out.println("!!!!!!!!!" + printEditionCategory);
+
 
         return "index";
 

@@ -10,12 +10,20 @@
 
 
 Выберете тип
-<select id="filter">
+<select id="filtercategory" onchange="filters()">
     <option value="all">Все</option>
     <option value="book" >Книги</option>
     <option value="newspaper">Газеты</option>
     <option value="magazine">Журналы</option>
 </select>
+
+<select id="pricesfilter" onchange="filters()">
+    <option value="nofilter">Без фильтра </option>
+    <option value="increase">По возрастанию</option>
+    <option value="decrease">По убыванию</option>
+
+</select>
+
 <table>
     <thead>
     <tr>
@@ -38,28 +46,50 @@
 </table>
 
 <script>
-    var  filter = document.getElementById("filter");
-    filter.onchange = function(){
 
-    let  path;
-    let filterValue = this.value;
-    if (this.value ===  'all'){
-        path = '/'
-    } else {
-        path = "/filter/" + this.value;
+
+
+
+
+function filters(){
+    let filterCategory = document.getElementById("filtercategory");
+    let filterPrice = document.getElementById("pricesfilter");
+
+    let previousCategory = filterCategory.value;
+    let previousPrice = filterPrice.value;
+    let  path = '/filter';
+    let dataObj = {};
+
+    if (filterCategory.value ===  'all' && filterPrice.value === 'nofilter'){
+        path = '/';
     }
+
+    if (filterCategory.value != 'all' && filterPrice.value === 'nofilter'){
+
+       dataObj =    {category : filterCategory.value , pricesort : "nofilter"};
+    }
+
+    if (filterCategory.value ===  'all' && filterPrice.value != 'nofilter'){
+        dataObj =    {category  :"all" , pricesort : filterPrice.value};
+    }
+
+    if (filterCategory.value !=  'all' && filterPrice.value != 'nofilter'){
+        dataObj =    {category : filterCategory.value , pricesort : filterPrice.value};
+    }
+
     $.ajax({
         url: path,
+        data: dataObj,
         type: 'GET',
-
         success: function( data ) {
             $("body").html(data);
-            $(filter).val(filterValue);
-
-        },
-        cache: false
+            $("#filtercategory").val(previousCategory);
+            $("#pricesfilter").val(previousPrice);
+        }
         });
-    };
+
+
+}
 
 </script>
 </body>
