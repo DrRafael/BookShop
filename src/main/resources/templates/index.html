@@ -10,43 +10,47 @@
 
 </head>
 <body>
+    <header>
+        <div style="float:right">
+            <a href="#">Войти</a>
+            <a href="#">Зарегистрироваться</a>
+        </div>
+    </header>
+    <div>
+        <span> Отображать </span>
+        <select id="filtercategory" th:onchange="filters()">
+            <option value="all">Все</option>
+            <option value="book" >Книги</option>
+            <option value="newspaper">Газеты</option>
+            <option value="magazine">Журналы</option>
+    </select>
+    <select id="pricesfilter" th:onchange="filters()">
+        <option value="nofilter">Без фильтра </option>
+        <option value="increase">По возрастанию</option>
+        <option value="decrease">По убыванию</option>
 
-
-Выберете тип
-<select id="filtercategory" th:onchange="filters()">
-    <option value="all">Все</option>
-    <option value="book" >Книги</option>
-    <option value="newspaper">Газеты</option>
-    <option value="magazine">Журналы</option>
-</select>
-
-<select id="pricesfilter" th:onchange="filters()">
-    <option value="nofilter">Без фильтра </option>
-    <option value="increase">По возрастанию</option>
-    <option value="decrease">По убыванию</option>
-
-</select>
-
-<table>
-    <thead>
-    <tr>
-        <th> Title </th>
-        <th> Author </th>
-        <th> Price </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${printEdition.empty}">
-        <td colspan="2"> No Books Available </td>
-    </tr>
-    <tr th:each="product : ${printEdition}">
-        <td><span th:text="${product.title}"> Title </span></td>
-        <td><span th:text="${product.author}"> Author </span></td>
-        <td><span th:text="${product.price}"> Price </span></td>
-        <td><span><button>Купить </button></span></td>
-    </tr>
-    </tbody>
-</table>
+    </select>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th> Title </th>
+            <th> Author </th>
+            <th> Price </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${printEdition.empty}">
+            <td colspan="2"> No Books Available </td>
+        </tr>
+        <tr th:each="product : ${printEdition}">
+            <td><span th:text="${product.title}"> Title </span></td>
+            <td><span th:text="${product.author}"> Author </span></td>
+            <td><span th:text="${product.price}"> Price </span></td>
+            <td><span><button>Купить </button></span></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
 
