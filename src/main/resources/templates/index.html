@@ -7,61 +7,67 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <header>
+        <div style="float:right">
+            <a href="#">Войти</a>
+            <a href="#">Зарегистрироваться</a>
+        </div>
+    </header>
+    <div>
+        <span> Отображать </span>
+        <select id="filter">
+            <option value="all">Все</option>
+            <option value="book" >Книги</option>
+            <option value="newspaper">Газеты</option>
+            <option value="magazine">Журналы</option>
+    </select>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th> Title </th>
+            <th> Author </th>
+            <th> Price </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${printEdition.empty}">
+            <td colspan="2"> No Books Available </td>
+        </tr>
+        <tr th:each="product : ${printEdition}">
+            <td><span th:text="${product.title}"> Title </span></td>
+            <td><span th:text="${product.author}"> Author </span></td>
+            <td><span th:text="${product.price}"> Price </span></td>
+            <td><span><button>Купить </button></span></td>
+        </tr>
+        </tbody>
+    </table>
 
+    <script>
+        var  filter = document.getElementById("filter");
+        filter.onchange = function(){
 
-Выберете тип
-<select id="filter">
-    <option value="all">Все</option>
-    <option value="book" >Книги</option>
-    <option value="newspaper">Газеты</option>
-    <option value="magazine">Журналы</option>
-</select>
-<table>
-    <thead>
-    <tr>
-        <th> Title </th>
-        <th> Author </th>
-        <th> Price </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${printEdition.empty}">
-        <td colspan="2"> No Books Available </td>
-    </tr>
-    <tr th:each="product : ${printEdition}">
-        <td><span th:text="${product.title}"> Title </span></td>
-        <td><span th:text="${product.author}"> Author </span></td>
-        <td><span th:text="${product.price}"> Price </span></td>
-        <td><span><button>Купить </button></span></td>
-    </tr>
-    </tbody>
-</table>
+        let  path;
+        let filterValue = this.value;
+        if (this.value ===  'all'){
+            path = '/'
+        } else {
+            path = "/filter/" + this.value;
+        }
+        $.ajax({
+            url: path,
+            type: 'GET',
 
-<script>
-    var  filter = document.getElementById("filter");
-    filter.onchange = function(){
+            success: function( data ) {
+                $("body").html(data);
+                $(filter).val(filterValue);
 
-    let  path;
-    let filterValue = this.value;
-    if (this.value ===  'all'){
-        path = '/'
-    } else {
-        path = "/filter/" + this.value;
-    }
-    $.ajax({
-        url: path,
-        type: 'GET',
+            },
+            cache: false
+            });
+        };
 
-        success: function( data ) {
-            $("body").html(data);
-            $(filter).val(filterValue);
-
-        },
-        cache: false
-        });
-    };
-
-</script>
+    </script>
 </body>
 </html>
 
