@@ -3,17 +3,17 @@ services:
   teste-postgres-compose:
     image: postgres:10
     environment:
-      POSTGRES_PASSWORD: "Post"
+      POSTGRES_PASSWORD: Post
     ports:
       - "15432:5432"
-    volumes:
-      - /var/lib/postgresql/data
-
     networks:
       - postgres-compose-network
-
-  javerservice:
-    image: openjdk:11
+    volumes:
+      - db-data:/volume_data
 networks:
   postgres-compose-network:
     driver: bridge
+
+volumes:
+  db-data:
+    driver: local
