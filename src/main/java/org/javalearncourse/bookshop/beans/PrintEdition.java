@@ -21,10 +21,11 @@ public class PrintEdition {
 
     }
 
-    public PrintEdition(String title, String author, int price) {
+    public PrintEdition(int id, String title, String author, int price) {
         this.title = title;
         this.author = author;
         this.price = price;
+        this.id = id;
     }
 
     public int getId() {
@@ -61,7 +62,7 @@ public class PrintEdition {
 
     @Override
     public String toString() {
-        return id + " " + title + " " + author;
+        return id + " " + title + " " + author +" "+ price;
     }
 }
 

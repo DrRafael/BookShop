@@ -1,8 +1,3 @@
-
-
-
-
-
 function filters(){
     let filterCategory = document.getElementById("filtercategory");
     let filterPrice = document.getElementById("pricesfilter");

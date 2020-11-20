@@ -6,15 +6,29 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/filter.js}"></script>
-
+    <script type="text/javascript" th:src="@{/js/cart.js}"></script>
 
 </head>
 <body>
     <header>
+
         <div style="float:right">
             <a href="#">Войти</a>
             <a href="#">Зарегистрироваться</a>
         </div>
+
+
+        <div id="easynetshop-cart">
+            <div id="enscart_my_wrapper">
+                <div id="enscart_myimage_wrapper">
+                    <a href="/cart" > <img src="img/cart1.png"> </a>
+                </div>
+
+                <div id="enscart_my_counter_wrapper"><span  id="easynetshop-cart-count">0</span></div>
+            </div>
+
+        </div>
+
     </header>
     <div>
         <span> Отображать </span>
@@ -40,17 +54,25 @@
         </tr>
         </thead>
         <tbody>
+
         <tr th:if="${printEdition.empty}">
             <td colspan="2"> No Books Available </td>
         </tr>
         <tr th:each="product : ${printEdition}">
-            <td><span th:text="${product.title}"> Title </span></td>
-            <td><span th:text="${product.author}"> Author </span></td>
-            <td><span th:text="${product.price}"> Price </span></td>
-            <td><span><button>Купить </button></span></td>
+
+            <td style="display:none"><span class="id"  th:text="${product.id}"> Id </span></td>
+            <td><span class="title" th:text="${product.title}"> Title </span></td>
+            <td><span class="author" th:text="${product.author}"> Author </span></td>
+            <td><span class="price" th:text="${product.price}"> Price </span></td>
+
+            <td><span><button class="button-cart" th:attr="data-art=${product}">Купить </button></span></td>
         </tr>
         </tbody>
     </table>
+    <div id="miniCart">
+    </div>
+
+  </body>
 </body>
 </html>
 
